@@ -1,0 +1,43 @@
+# --- QMIX specific parameters ---
+
+# use epsilon greedy action selector
+action_selector: "epsilon_greedy"
+epsilon_start: 1.0
+epsilon_finish: 0.05
+epsilon_anneal_time: 50000
+
+runner: "episode"
+
+buffer_size: 5000
+
+# update the target network every {} episodes
+target_update_interval: 200
+
+# use the Q_Learner to train
+agent_output_type: "q"
+double_q: True
+mixing_embed_dim: 32
+hypernet_layers: 2
+hypernet_embed: 64
+
+graph_library: pyG  #dgl or pyG
+num_heads: 4 # use in qatten, qattenw, qgraph_atten
+
+
+
+qatten_is_weighted_head: True
+
+name: "QRlation" #agent use gat to enlarge view, mixer use gat to mix
+
+mixer: "qgraph_attention"
+learner: "q_graph_learner"
+
+save_graph: False
+gnn_method: ar
+num_gnn_layers: 2
+output_agent_gnn_weights: False  #there is not weight to be output
+is_output_attention_weights: True #whether output the attention weight of gnn for mixer
+attention_weight_kl_regulzation: True  #whether to use kl of weights of the qatten for regulation
+lambda_kl: 0  #used for kl of qatten weights
+lambda_gnn_kl: 0  #the kl for mixer gnn
+full_relational_graph: True
